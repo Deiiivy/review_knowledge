@@ -1,21 +1,25 @@
 #include <algorithm>
+#include <cstdlib>
 #include <iostream>
+#include <regex>
 #include <string>
 #include <vector>
 #include "Todo.h"
+#include <fstream>
 
 int main() {
   int opcion;
   std::vector<task> myTask;
+  std::ifstream archivo;
 
-  myTask.push_back({1, "Terminar todoList", false});
-  myTask.push_back({2, "Entrar a la review", false});
+  archivo.open("task.txt");
 
   do {
     std::cout << "\nBienvenido a tu gestion de tareas \n";
     std::cout << "1. Ver tareas\n";
     std::cout << "2. Crear tarea\n";
-    std::cout << "3. Salir\n";
+    std::cout << "3. eliminar una tarea\n";
+    std::cout << "4. Salir\n";
     std::cout << "Elige una opcion: ";
     std::cin >> opcion;
 
@@ -27,14 +31,15 @@ int main() {
         createTask(myTask);
         break;
       case 3:
-        std::cout << "¡Haz salido!\n";
+        deleteTask(myTask);
         break;
-      default:
-        std::cout << "Opcion no valida.\n";
+      case 4: 
+        std::cout << "haz salido!!!!\n";
+        archivo.close();
         break;
     }
 
-  } while (opcion != 3);
+  } while (opcion != 4);
 
   return 0;
 }
